@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: 'client1'
+
+server:
+  port: 8081
+
+eureka:
+  instance:
+    hostname: ${vcap.application.uris[0]:localhost}
+    #  vcap.application.uris is eureka property it will pick
+    #  up the hostname
+    prefer-ip-address: true
+    lease-renewal-interval-in-seconds: 10
+    lease-expiration-duration-in-seconds: 20
+  # for every 10s & 20s it will go and check health of a
+  # particular client, it's healthy or not. It will remove that
+  # from server registry
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:9090/eureka/
